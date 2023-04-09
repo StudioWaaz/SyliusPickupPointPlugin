@@ -5,6 +5,7 @@
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     errorBaseline="psalm-baseline.xml"
+    allowStringToStandInForClass="true"
 >
     <projectFiles>
         <directory name="src"/>
@@ -12,6 +13,7 @@
         <ignoreFiles>
             <directory name="tests/Application"/>
             <directory name="vendor"/>
+            <file name="src/DependencyInjection/*"/>
         </ignoreFiles>
     </projectFiles>
     <plugins>

@@ -17,6 +17,7 @@ use Setono\SyliusPickupPointPlugin\Factory\PickupPointCodeFactoryInterface;
 final class PickupPointToIdentifierTransformer implements DataTransformerInterface
 {
     private ServiceRegistryInterface $providerRegistry;
+    private PickupPointCodeFactoryInterface $pickupPointCodeFactory;
 
     public function __construct(ServiceRegistryInterface $providerRegistry, PickupPointCodeFactoryInterface $pickupPointCodeFactory)
     {
@@ -47,6 +48,7 @@ final class PickupPointToIdentifierTransformer implements DataTransformerInterfa
             return null;
         }
 
+        /** @var PickupPointCodeInterface $pickupPoint */
         $pickupPointCode = $this->pickupPointCodeFactory->createFromString($value);
 
         /** @var ProviderInterface $provider */

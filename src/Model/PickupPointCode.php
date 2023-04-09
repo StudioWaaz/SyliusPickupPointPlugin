@@ -27,7 +27,7 @@ final class PickupPointCode implements PickupPointCodeInterface
     /**
      * @param mixed $id
      */
-    public function __construct($id, string $provider, string $country)
+    public function __construct(string $id, string $provider, string $country)
     {
         Assert::scalar($id);
 
@@ -39,9 +39,9 @@ final class PickupPointCode implements PickupPointCodeInterface
         $this->country = $country;
     }
 
-    public static function createFromString(string $val): self
+    public static function createFromString(string $string): self
     {
-        $parts = explode(self::DELIMITER, $val);
+        $parts = explode(self::DELIMITER, $string);
 
         if (!isset($parts[0])) {
             throw new InvalidArgumentException('No provider part provided');

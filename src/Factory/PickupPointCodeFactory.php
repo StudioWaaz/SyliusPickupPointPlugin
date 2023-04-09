@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Factory;
 
+use Webmozart\Assert\Assert;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 
 class PickupPointCodeFactory implements PickupPointCodeFactoryInterface
@@ -15,11 +16,15 @@ class PickupPointCodeFactory implements PickupPointCodeFactoryInterface
 
     public function createNew(string $id, string $provider, string $country): PickupPointCodeInterface
     {
-        return new $this->pickupPointCodeClass($id, $provider, $country);
+        $code = new $this->pickupPointCodeClass($id, $provider, $country);
+        Assert::isInstanceOf($code, PickupPointCodeInterface::class);
+        return $code;
     }
 
     public function createFromString(string $string): PickupPointCodeInterface
     {
-        return $this->pickupPointCodeClass::createFromString($string);
+        $code = $this->pickupPointCodeClass::createFromString($string);
+        Assert::isInstanceOf($code, PickupPointCodeInterface::class);
+        return $code;
     }
 }

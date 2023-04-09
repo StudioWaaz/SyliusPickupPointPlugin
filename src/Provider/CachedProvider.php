@@ -12,7 +12,6 @@ use Psr\Cache\CacheItemPoolInterface;
 use Behat\Transliterator\Transliterator;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 
@@ -45,7 +44,9 @@ final class CachedProvider extends Provider
             // Store separate PickupPoints to retrieve at findOnePickupPointById
             /** @var PickupPointInterface $pickupPoint */
             foreach ($pickupPoints as $pickupPoint) {
-                $pickupPointCacheKey = $this->buildPickupPointIdCacheKey($pickupPoint->getCode());
+                /** @var PickupPointCodeInterface $code */
+                $code = $pickupPoint->getCode();
+                $pickupPointCacheKey = $this->buildPickupPointIdCacheKey($code);
                 $pickupPointCacheItem = $this->cacheItemPool->getItem($pickupPointCacheKey);
                 $pickupPointCacheItem->set($pickupPoint);
                 $this->cacheItemPool->save($pickupPointCacheItem);
@@ -124,7 +125,7 @@ final class CachedProvider extends Provider
         );
     }
 
-    private function buildPickupPointIdCacheKey(PickupPointCode $id): string
+    private function buildPickupPointIdCacheKey(PickupPointCodeInterface $id): string
     {
         return $id->getValue();
     }
