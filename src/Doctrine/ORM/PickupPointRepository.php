@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Doctrine\ORM;
 
+use Webmozart\Assert\Assert;
+use Sylius\Component\Core\Model\OrderInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
-use Setono\SyliusPickupPointPlugin\Repository\PickupPointRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\OrderInterface;
-use Webmozart\Assert\Assert;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
+use Setono\SyliusPickupPointPlugin\Repository\PickupPointRepositoryInterface;
 
 class PickupPointRepository extends EntityRepository implements PickupPointRepositoryInterface
 {
-    public function findOneByCode(PickupPointCode $code): ?PickupPointInterface
+    public function findOneByCode(PickupPointCodeInterface $code): ?PickupPointInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.code.id = :codeId')

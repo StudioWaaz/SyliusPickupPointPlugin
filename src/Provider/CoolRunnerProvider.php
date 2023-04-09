@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Provider;
 
-use Setono\CoolRunner\Client\ClientInterface;
-use Setono\CoolRunner\DTO\Servicepoint;
-use Setono\SyliusPickupPointPlugin\Exception\TimeoutException;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Throwable;
 use Webmozart\Assert\Assert;
+use Setono\CoolRunner\DTO\Servicepoint;
+use Setono\CoolRunner\Client\ClientInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
+use Setono\SyliusPickupPointPlugin\Exception\TimeoutException;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 
 final class CoolRunnerProvider extends Provider
 {
@@ -64,7 +65,7 @@ final class CoolRunnerProvider extends Provider
         return $pickupPoints;
     }
 
-    public function findPickupPoint(PickupPointCode $code): ?PickupPointInterface
+    public function findPickupPoint(PickupPointCodeInterface $code): ?PickupPointInterface
     {
         try {
             $servicepoint = $this->client->servicepoints()->findById($this->carrier, $code->getIdPart());

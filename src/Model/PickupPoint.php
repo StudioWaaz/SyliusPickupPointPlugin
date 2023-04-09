@@ -11,7 +11,7 @@ class PickupPoint implements PickupPointInterface
 {
     protected ?int $id;
 
-    protected ?PickupPointCode $code = null;
+    protected ?PickupPointCodeInterface $code = null;
 
     protected ?string $name = null;
 
@@ -32,12 +32,12 @@ class PickupPoint implements PickupPointInterface
         return $this->id;
     }
 
-    public function getCode(): ?PickupPointCode
+    public function getCode(): ?PickupPointCodeInterface
     {
         return $this->code;
     }
 
-    public function setCode(PickupPointCode $code): void
+    public function setCode(PickupPointCodeInterface $code): void
     {
         $this->code = $code;
     }

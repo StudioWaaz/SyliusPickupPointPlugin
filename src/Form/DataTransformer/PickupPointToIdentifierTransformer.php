@@ -4,27 +4,30 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Form\DataTransformer;
 
+use function sprintf;
+use Symfony\Component\Form\DataTransformerInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
 use Setono\SyliusPickupPointPlugin\Provider\ProviderInterface;
-use function sprintf;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\Form\DataTransformerInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use Setono\SyliusPickupPointPlugin\Factory\PickupPointCodeFactoryInterface;
 
 final class PickupPointToIdentifierTransformer implements DataTransformerInterface
 {
     private ServiceRegistryInterface $providerRegistry;
 
-    public function __construct(ServiceRegistryInterface $providerRegistry)
+    public function __construct(ServiceRegistryInterface $providerRegistry, PickupPointCodeFactoryInterface $pickupPointCodeFactory)
     {
         $this->providerRegistry = $providerRegistry;
+        $this->pickupPointCodeFactory = $pickupPointCodeFactory;
     }
 
     /**
      * @param mixed|PickupPointInterface $value
      */
-    public function transform($value): ?PickupPointCode
+    public function transform($value): ?PickupPointCodeInterface
     {
         if (null === $value) {
             return null;
@@ -44,13 +47,13 @@ final class PickupPointToIdentifierTransformer implements DataTransformerInterfa
             return null;
         }
 
-        $pickupPointId = PickupPointCode::createFromString($value);
+        $pickupPointCode = $this->pickupPointCodeFactory->createFromString($value);
 
         /** @var ProviderInterface $provider */
-        $provider = $this->providerRegistry->get($pickupPointId->getProviderPart());
+        $provider = $this->providerRegistry->get($pickupPointCode->getProviderPart());
 
         /** @var PickupPointInterface $pickupPoint */
-        $pickupPoint = $provider->findPickupPoint($pickupPointId);
+        $pickupPoint = $provider->findPickupPoint($pickupPointCode);
 
         $this->assertTransformationValueType($pickupPoint, PickupPointInterface::class);
 

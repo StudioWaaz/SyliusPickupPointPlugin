@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace Setono\SyliusPickupPointPlugin\Provider;
 
 use function preg_replace;
-use Psr\Http\Client\NetworkExceptionInterface;
+use Webmozart\Assert\Assert;
 use Setono\DAO\Client\ClientInterface;
-use Setono\SyliusPickupPointPlugin\Exception\TimeoutException;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
+use Psr\Http\Client\NetworkExceptionInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Webmozart\Assert\Assert;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
+use Setono\SyliusPickupPointPlugin\Exception\TimeoutException;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 
 final class DAOProvider extends Provider
 {
@@ -46,7 +47,7 @@ final class DAOProvider extends Provider
         ]);
     }
 
-    public function findPickupPoint(PickupPointCode $code): ?PickupPointInterface
+    public function findPickupPoint(PickupPointCodeInterface $code): ?PickupPointInterface
     {
         foreach ($this->_findPickupPoints([
             'shopid' => $code->getIdPart(),

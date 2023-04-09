@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Provider;
 
-use Behat\Transliterator\Transliterator;
 use Generator;
-use Psr\Cache\CacheItemPoolInterface;
+use function sprintf;
 use RuntimeException;
+use Webmozart\Assert\Assert;
+use Psr\Cache\CacheItemPoolInterface;
+use Behat\Transliterator\Transliterator;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
-use function sprintf;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Webmozart\Assert\Assert;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 
 final class CachedProvider extends Provider
 {
@@ -57,7 +58,7 @@ final class CachedProvider extends Provider
         return $pickupPoints;
     }
 
-    public function findPickupPoint(PickupPointCode $code): ?PickupPointInterface
+    public function findPickupPoint(PickupPointCodeInterface $code): ?PickupPointInterface
     {
         $pickupPointCacheKey = $this->buildPickupPointIdCacheKey($code);
         if (!$this->cacheItemPool->hasItem($pickupPointCacheKey)) {

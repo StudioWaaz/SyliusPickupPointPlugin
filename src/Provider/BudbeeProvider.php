@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Provider;
 
-use Setono\Budbee\Client\ClientInterface;
+use Throwable;
 use Setono\Budbee\DTO\Box;
-use Setono\SyliusPickupPointPlugin\Exception\TimeoutException;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
+use Webmozart\Assert\Assert;
+use Setono\Budbee\Client\ClientInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Throwable;
-use Webmozart\Assert\Assert;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
+use Setono\SyliusPickupPointPlugin\Exception\TimeoutException;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 
 final class BudbeeProvider extends Provider
 {
@@ -58,7 +59,7 @@ final class BudbeeProvider extends Provider
         return $pickupPoints;
     }
 
-    public function findPickupPoint(PickupPointCode $code): ?PickupPointInterface
+    public function findPickupPoint(PickupPointCodeInterface $code): ?PickupPointInterface
     {
         try {
             $box = $this->client->boxes()->getLockerByIdentifier($code->getIdPart());

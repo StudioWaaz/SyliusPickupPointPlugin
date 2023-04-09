@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace Setono\SyliusPickupPointPlugin\Provider;
 
 use function preg_replace;
-use Setono\GLS\Webservice\Client\ClientInterface;
-use Setono\GLS\Webservice\Exception\ConnectionException;
-use Setono\GLS\Webservice\Exception\NoResultException;
-use Setono\GLS\Webservice\Exception\ParcelShopNotFoundException;
-use Setono\GLS\Webservice\Model\ParcelShop;
-use Setono\SyliusPickupPointPlugin\Exception\TimeoutException;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
+use Setono\GLS\Webservice\Model\ParcelShop;
+use Sylius\Component\Core\Model\OrderInterface;
+use Setono\GLS\Webservice\Client\ClientInterface;
+use Setono\GLS\Webservice\Exception\NoResultException;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Setono\GLS\Webservice\Exception\ConnectionException;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
+use Setono\SyliusPickupPointPlugin\Exception\TimeoutException;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
+use Setono\GLS\Webservice\Exception\ParcelShopNotFoundException;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 
 final class GlsProvider extends Provider
 {
@@ -68,7 +69,7 @@ final class GlsProvider extends Provider
         return $pickupPoints;
     }
 
-    public function findPickupPoint(PickupPointCode $code): ?PickupPointInterface
+    public function findPickupPoint(PickupPointCodeInterface $code): ?PickupPointInterface
     {
         try {
             $parcelShop = $this->client->getOneParcelShop($code->getIdPart());

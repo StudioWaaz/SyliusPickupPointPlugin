@@ -8,9 +8,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface PickupPointInterface extends ResourceInterface
 {
-    public function getCode(): ?PickupPointCode;
+    public function getCode(): ?PickupPointCodeInterface;
 
-    public function setCode(PickupPointCode $code): void;
+    public function setCode(PickupPointCodeInterface $code): void;
 
     public function getName(): ?string;
 

@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Symfony\Component\Intl\Countries;
 use Webmozart\Assert\Assert;
 
-final class PickupPointCode
+final class PickupPointCode implements PickupPointCodeInterface
 {
     private const DELIMITER = '---';
 

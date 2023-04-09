@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Repository;
 
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 
 interface PickupPointRepositoryInterface extends RepositoryInterface
 {
-    public function findOneByCode(PickupPointCode $code): ?PickupPointInterface;
+    public function findOneByCode(PickupPointCodeInterface $code): ?PickupPointInterface;
 
     /**
      * @psalm-return list<PickupPointInterface>
