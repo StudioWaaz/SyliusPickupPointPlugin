@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Doctrine\ORM;
 
-use Webmozart\Assert\Assert;
-use Sylius\Component\Core\Model\OrderInterface;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
 use Setono\SyliusPickupPointPlugin\Repository\PickupPointRepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\OrderInterface;
+use Webmozart\Assert\Assert;
 
 class PickupPointRepository extends EntityRepository implements PickupPointRepositoryInterface
 {

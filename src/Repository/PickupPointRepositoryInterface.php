@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Repository;
 
-use Sylius\Component\Core\Model\OrderInterface;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface PickupPointRepositoryInterface extends RepositoryInterface
 {

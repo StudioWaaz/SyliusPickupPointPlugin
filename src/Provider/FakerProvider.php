@@ -6,13 +6,13 @@ namespace Setono\SyliusPickupPointPlugin\Provider;
 
 use Faker\Factory;
 use Faker\Generator;
-use Webmozart\Assert\Assert;
-use Sylius\Component\Core\Model\OrderInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPoint;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 final class FakerProvider extends Provider
 {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Setono\SyliusPickupPointPlugin\Behat\Mocker;
 
-use Sylius\Component\Core\Model\OrderInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPoint;
-use Setono\SyliusPickupPointPlugin\Provider\Provider;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
+use Setono\SyliusPickupPointPlugin\Provider\Provider;
+use Sylius\Component\Core\Model\OrderInterface;
 
 class PostNordProviderMocker extends Provider
 {

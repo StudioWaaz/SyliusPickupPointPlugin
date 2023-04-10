@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Form\DataTransformer;
 
-use function sprintf;
-use Symfony\Component\Form\DataTransformerInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
+use Setono\SyliusPickupPointPlugin\Factory\PickupPointCodeFactoryInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
 use Setono\SyliusPickupPointPlugin\Provider\ProviderInterface;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
+use function sprintf;
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use Setono\SyliusPickupPointPlugin\Factory\PickupPointCodeFactoryInterface;
 
 final class PickupPointToIdentifierTransformer implements DataTransformerInterface
 {
     private ServiceRegistryInterface $providerRegistry;
+
     private PickupPointCodeFactoryInterface $pickupPointCodeFactory;
 
     public function __construct(ServiceRegistryInterface $providerRegistry, PickupPointCodeFactoryInterface $pickupPointCodeFactory)
@@ -48,7 +48,7 @@ final class PickupPointToIdentifierTransformer implements DataTransformerInterfa
             return null;
         }
 
-        /** @var PickupPointCodeInterface $pickupPoint */
+        /** @var PickupPointCodeInterface $pickupPointCode */
         $pickupPointCode = $this->pickupPointCodeFactory->createFromString($value);
 
         /** @var ProviderInterface $provider */

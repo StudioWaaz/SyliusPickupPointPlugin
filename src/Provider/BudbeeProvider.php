@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Provider;
 
-use Throwable;
-use Setono\Budbee\DTO\Box;
-use Webmozart\Assert\Assert;
 use Setono\Budbee\Client\ClientInterface;
+use Setono\Budbee\DTO\Box;
+use Setono\SyliusPickupPointPlugin\Exception\TimeoutException;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
-use Setono\SyliusPickupPointPlugin\Exception\TimeoutException;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
-use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
+use Throwable;
+use Webmozart\Assert\Assert;
 
 final class BudbeeProvider extends Provider
 {
