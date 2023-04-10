@@ -9,7 +9,9 @@ use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 
 class PickupPointCodeFactory implements PickupPointCodeFactoryInterface
 {
-    public function __construct(private string $pickupPointCodeClass)
+    private $pickupPointCodeClass;
+    
+    public function __construct(string $pickupPointCodeClass)
     {
         $this->pickupPointCodeClass = $pickupPointCodeClass;
     }
