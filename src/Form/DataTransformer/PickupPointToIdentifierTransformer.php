@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusPickupPointPlugin\Form\DataTransformer;
 
-use Setono\SyliusPickupPointPlugin\Factory\PickupPointCodeFactoryInterface;
+use Setono\SyliusPickupPointPlugin\Model\PickupPointCode;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointCodeInterface;
 use Setono\SyliusPickupPointPlugin\Model\PickupPointInterface;
 use Setono\SyliusPickupPointPlugin\Provider\ProviderInterface;
@@ -17,12 +17,9 @@ final class PickupPointToIdentifierTransformer implements DataTransformerInterfa
 {
     private ServiceRegistryInterface $providerRegistry;
 
-    private PickupPointCodeFactoryInterface $pickupPointCodeFactory;
-
-    public function __construct(ServiceRegistryInterface $providerRegistry, PickupPointCodeFactoryInterface $pickupPointCodeFactory)
+    public function __construct(ServiceRegistryInterface $providerRegistry)
     {
         $this->providerRegistry = $providerRegistry;
-        $this->pickupPointCodeFactory = $pickupPointCodeFactory;
     }
 
     /**
@@ -49,7 +46,7 @@ final class PickupPointToIdentifierTransformer implements DataTransformerInterfa
         }
 
         /** @var PickupPointCodeInterface $pickupPointCode */
-        $pickupPointCode = $this->pickupPointCodeFactory->createFromString($value);
+        $pickupPointCode = PickupPointCode::createFromString($value);
 
         /** @var ProviderInterface $provider */
         $provider = $this->providerRegistry->get($pickupPointCode->getProviderPart());

@@ -12,9 +12,10 @@ use Setono\SyliusPickupPointPlugin\Form\DataTransformer\PickupPointToIdentifierT
 
 class PickupPointToIdentifierTransformerSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $providerRegistry, PickupPointCodeFactoryInterface $pickupPointCodeFactory)
+
+    function let(ServiceRegistryInterface $providerRegistry)
     {
-        $this->beConstructedWith($providerRegistry, $pickupPointCodeFactory);
+        $this->beConstructedWith($providerRegistry);
     }
 
     function it_is_initializable()
@@ -22,7 +23,7 @@ class PickupPointToIdentifierTransformerSpec extends ObjectBehavior
         $this->shouldHaveType(PickupPointToIdentifierTransformer::class);
     }
 
-    function it_transforms_a_pickup_point_to_an_identifier(PickupPointCodeFactoryInterface $pickupPointCodeFactory)
+    function it_transforms_a_pickup_point_to_an_identifier()
     {
         $pickupPoint = new PickupPoint;
         $pickupPointCode = new PickupPointCode('12345', 'faker', 'FR');
@@ -31,18 +32,16 @@ class PickupPointToIdentifierTransformerSpec extends ObjectBehavior
         $this->transform($pickupPoint)->shouldReturn($pickupPointCode);
     }
 
-    function it_reverse_transforms_an_identifier_to_a_pickup_point(ServiceRegistryInterface $providerRegistry, PickupPointCodeFactoryInterface $pickupPointCodeFactory, ProviderInterface $provider)
+    function it_reverse_transforms_an_identifier_to_a_pickup_point(ServiceRegistryInterface $providerRegistry, ProviderInterface $provider)
     {
         $pickupPointCode = new PickupPointCode('12345', 'faker', 'FR');
         $pickupPoint = new PickupPoint;
         $pickupPoint->setCode($pickupPointCode);
 
-        $pickupPointCodeFactory->createFromString('12345---faker---FR')->willReturn($pickupPointCode);
-
         $providerRegistry->get('faker')->willReturn($provider);
 
         $provider->findPickupPoint($pickupPointCode)->willReturn($pickupPoint);
 
-        $this->reverseTransform('12345---faker---FR')->shouldReturnAnInstanceOf(PickupPoint::class);
+        $this->reverseTransform('faker---12345---FR')->shouldReturnAnInstanceOf(PickupPoint::class);
     }
 }

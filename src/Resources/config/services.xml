@@ -13,6 +13,5 @@
         <import resource="services/registry.xml"/>
         <import resource="services/shipping.xml"/>
         <import resource="services/validator.xml"/>
-        <import resource="services/factory.xml"/>
     </imports>
 </container>

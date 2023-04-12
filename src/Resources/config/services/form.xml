@@ -9,7 +9,6 @@
         <service id="setono_sylius_pickup_point.form.type.data_transformer.pickup_point_to_identifier"
                  class="Setono\SyliusPickupPointPlugin\Form\DataTransformer\PickupPointToIdentifierTransformer">
             <argument type="service" id="setono_sylius_pickup_point.registry.provider" />
-            <argument type="service" id="setono_sylius_pickup_point.factory.pickup_point_code_factory" />
         </service>
 
         <!-- Forms -->
